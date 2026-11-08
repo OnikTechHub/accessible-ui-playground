@@ -1,0 +1,156 @@
+/**
+ * Accessible Modal Dialog Styles
+ * Follows WCAG 2.1 AA / AAA high contrast and reduced motion guidelines.
+ */
+
+.a11y-modal-portal {
+  position: relative;
+  z-index: 9999;
+}
+
+.a11y-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 9999;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  overflow-y: auto;
+  animation: a11y-modal-overlay-fade-in 150ms ease-out;
+}
+
+.a11y-modal-dialog {
+  position: relative;
+  background-color: #ffffff;
+  color: #111827;
+  border-radius: 0.625rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 32rem;
+  max-height: calc(100vh - 2rem);
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  box-sizing: border-box;
+  animation: a11y-modal-dialog-scale-in 150ms ease-out;
+}
+
+/* Clear focus-visible ring for keyboard navigation */
+.a11y-modal-dialog:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.a11y-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.a11y-modal-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: #111827;
+}
+
+.a11y-modal-description {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.25rem;
+}
+
+.a11y-modal-body {
+  padding: 1.25rem 1.5rem;
+  overflow-y: auto;
+  color: #374151;
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+}
+
+.a11y-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  border-bottom-left-radius: 0.625rem;
+  border-bottom-right-radius: 0.625rem;
+}
+
+.a11y-modal-close-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0.375rem;
+  background-color: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.a11y-modal-close-button:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.a11y-modal-close-button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Animations */
+@keyframes a11y-modal-overlay-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes a11y-modal-dialog-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .a11y-modal-overlay,
+  .a11y-modal-dialog {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Windows High Contrast / Forced Colors Mode support */
+@media (forced-colors: active) {
+  .a11y-modal-dialog {
+    border: 2px solid ButtonText;
+  }
+  .a11y-modal-close-button:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}
+
